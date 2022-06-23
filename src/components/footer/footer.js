@@ -4,7 +4,7 @@ function Footer() {
     return (
         <>
             <footer>
-                <p class="footer-text">Copyright 2020 Argent Bank</p>
+                <p className="footer-text">Copyright 2020 Argent Bank</p>
             </footer>
         </>
     );

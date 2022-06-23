@@ -7,7 +7,6 @@ import securityIcon from "../../assets/icon-security.png";
 
 const Home = () => {
     return (
-
         <div className="home">
             <div className="hero">
                 <section className="hero-content">
