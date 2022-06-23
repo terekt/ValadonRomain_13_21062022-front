@@ -4,6 +4,7 @@ import './index.css';
 import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
 import Footer from './components/footer/footer';
 import Home from './pages/Home/home';
+import Login from './pages/Login/login';
 import Navbar from './components/navbar/navbar';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -13,6 +14,8 @@ root.render(
             <Navbar />
             <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/home" element={<Home />} />
+                <Route path="/login" element={<Login />} />
             </Routes>
             <Footer />
         </Router>
