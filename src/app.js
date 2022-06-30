@@ -13,9 +13,8 @@ function App() {
             <Navbar />
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/home" element={<Home />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/user" element={<Profil />} />
+                <Route path="/profile" element={<Profil />} />
             </Routes>
             <Footer />
         </Router>

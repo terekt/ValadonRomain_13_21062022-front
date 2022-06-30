@@ -15,7 +15,7 @@ function Login() {
 
     const handleSubmit = (e) => {
         dispatch(login({firstName: "Tony", lastName: "Stark", "email": username, "password": password}))
-        navigate("/user", { replace: true });
+        navigate("/profile", { replace: true });
     }
 
     return (
