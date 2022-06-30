@@ -5,7 +5,7 @@ import moneyIcon from "../../assets/icon-money.png";
 import securityIcon from "../../assets/icon-security.png";
 
 
-const Home = () => {
+function Home() {
     return (
         <div className="home">
             <div className="hero">

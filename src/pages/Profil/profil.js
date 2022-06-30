@@ -3,7 +3,6 @@ import "./profil.css"
 
 function Profil() {
 
-
     return (
         <main className="main bg-dark">
             <div className="header">
