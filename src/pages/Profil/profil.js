@@ -1,8 +1,9 @@
 import Account from "../../components/account/account";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { editname } from '../../services/api';
 import "./profil.css"
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function Profil() {
 
@@ -11,15 +12,25 @@ function Profil() {
     const [isActive, setIsActive] = useState(false);
     const user = useSelector((state) => state.user);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
+    //Send change of name
     const handleSubmit = (e) => {
         dispatch(editname({ firstName: firstname, lastName: lastname }))
         setIsActive(current => !current);
     }
 
+    //Allow to hide or show the editing of the name
     const editState = (e) => {
         setIsActive(current => !current);
     };
+
+    //Redirect to home if not connected
+    useEffect(() => {
+        if (user.value.email === "" || user.value.password === ""){
+            navigate("/");
+        }
+    },[])
 
     return (
         <main className="main bg-dark">

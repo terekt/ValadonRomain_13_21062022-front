@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import './navbar.css';
 import logo from "../../assets/argentBankLogo.png"
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from '../../services/api';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

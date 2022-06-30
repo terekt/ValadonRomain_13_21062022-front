@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialStateValue = {firstName: "ea", lastName: "", email: "", password: ""};
+const initialStateValue = {firstName: "", lastName: "", email: "", password: ""};
 
 export const userSlice = createSlice({
     name: "user",
