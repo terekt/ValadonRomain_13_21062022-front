@@ -24,26 +24,27 @@ function Profil() {
     const editState = (e) => {
         setIsActive(current => !current);
     };
+    
 
     //Redirect to home if not connected
-    useEffect(() => {
-        if (user.value.email === "" || user.value.password === ""){
+    /*useEffect(() => {
+        if (user.value.body.id === undefined ){
             navigate("/");
         }
-    },[])
+    },[])*/
 
     return (
         <main className="main bg-dark">
             <div className="header">
                 <div className={isActive ? 'edit-hide' : 'edit-show'}>
-                    <h1>Welcome back <br />{user.value.firstName} {user.value.lastName}!</h1>
+                    <h1>Welcome back <br />{user.value.body.firstName} {user.value.body.lastName}!</h1>
                     <button className="edit-button" onClick={(e) => { e.preventDefault(); editState() }}>Edit Name</button>
                 </div>
                 <form id="name-form" className={isActive ? 'edit-show' : 'edit-hide'} >
                     <h1>Welcome back</h1>
                     <div className="name-wrapper">
-                        <input type="text" id="firstname" onChange={(e) => setfirstname(e.target.value)} placeholder={user.value.firstName} value={firstname} />
-                        <input type="text" id="lastname" onChange={(e) => setlastname(e.target.value)} placeholder={user.value.lastName} value={lastname} />
+                        <input type="text" id="firstname" onChange={(e) => setfirstname(e.target.value)} placeholder={user.value.body.firstName} value={firstname} />
+                        <input type="text" id="lastname" onChange={(e) => setlastname(e.target.value)} placeholder={user.value.body.lastName} value={lastname} />
                     </div>
                     <div className="button-wrapper">
                         <button type="submit" className="edit-button" onClick={(e) => { e.preventDefault(); handleSubmit() }}>Update</button>

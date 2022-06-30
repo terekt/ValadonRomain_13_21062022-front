@@ -14,23 +14,43 @@ function Login() {
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
-        dispatch(login({firstName: "Tony", lastName: "Stark", "email": username, "password": password}))
-        navigate("/profile", { replace: true });
+        //dispatch(login({firstName: "Tony", lastName: "Stark", "email": username, "password": password}))
+        //navigate("/profile", { replace: true });
+        const data = JSON.stringify({ "email": username, "password": password })
+        
+        fetch("http://localhost:3001/api/v1/user/login",
+            {
+                body: data,
+                headers: { Accept: "application/json", "Content-Type": "application/json" },
+                method: "POST"
+            }).then(data => {
+                if (data.ok === true) {
+                    return data.json()
+                }
+            }).then(data => {
+                fetch("http://localhost:3001/api/v1/user/profile", {
+                    headers: { Accept: "application/json", Authorization: 'Bearer' + data.body.token },
+                    method: "POST"
+                }).then(data => data.json()).then(data => dispatch(login(data)), navigate("/profile", { replace: true }))
+            })
+
     }
+
+
 
     return (
         <main className="main bg-dark">
             <section className="sign-in-content">
                 <FontAwesomeIcon className='sign-in-icon' icon={faCircleUser} />
                 <h1>Sign In</h1>
-                <form onSubmit={(e) => {e.preventDefault();handleSubmit()}}>
+                <form onSubmit={(e) => { e.preventDefault(); handleSubmit() }}>
                     <div className="input-wrapper">
                         <label htmlFor="username">Username</label>
-                        <input type="email" id="username" onChange={(e) => setUsername(e.target.value)} value={username}/>
+                        <input type="email" id="username" onChange={(e) => setUsername(e.target.value)} value={username} />
                     </div>
                     <div className="input-wrapper">
                         <label htmlFor="password">Password</label>
-                        <input type="password" id="password" onChange={e => setPassword(e.target.value)} value={password}/>
+                        <input type="password" id="password" onChange={e => setPassword(e.target.value)} value={password} />
                     </div>
                     <div className="input-remember">
                         <input type="checkbox" id="remember-me" />

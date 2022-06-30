@@ -24,7 +24,7 @@ function Navbar() {
             <div>
                 {user.connected ? <>
                     <Link className="main-nav-item" to="/profile">
-                        <FontAwesomeIcon icon={faCircleUser} /> {user.value.firstName}
+                        <FontAwesomeIcon icon={faCircleUser} /> {user.value.body.firstName}
                     </Link>
                     <Link to={"/"} className="main-nav-item" onClick={() => dispatch(logout())}>
                         <FontAwesomeIcon icon={faArrowAltCircleRight} /> Sign Out
