@@ -1,6 +1,6 @@
 import Account from "../../components/account/account";
 import React, { useState } from "react";
-import { login } from '../../services/api';
+import { editname } from '../../services/api';
 import "./profil.css"
 import { useDispatch, useSelector } from "react-redux";
 
@@ -13,7 +13,7 @@ function Profil() {
     const dispatch = useDispatch();
 
     const handleSubmit = (e) => {
-        dispatch(login({ firstName: firstname, lastName: lastname }))
+        dispatch(editname({ firstName: firstname, lastName: lastname }))
         setIsActive(current => !current);
     }
 
