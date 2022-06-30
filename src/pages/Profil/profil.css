@@ -14,3 +14,30 @@
 .header h1 {
     margin: 0.67em 0;
 }
+
+.name-wrapper, .button-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.header #name-form h1 {
+    margin: 0.67em 0 0 0;
+}
+
+.name-wrapper input:first-child, .button-wrapper button:first-child {
+    margin-right: 20px;
+}
+
+.name-wrapper input{
+    margin: 20px 0;
+    width: 150px;
+    height: 30px;
+}
+
+.edit-show {
+    display: initial;
+}
+
+.edit-hide {
+    display: none;
+}

@@ -25,12 +25,10 @@ function Navbar() {
             <div>
                 {user.connected ? <>
                     <Link className="main-nav-item" to="/user">
-                        <FontAwesomeIcon icon={faCircleUser} /> 
-                        {user.value.firstName}
+                        <FontAwesomeIcon icon={faCircleUser} /> {user.value.firstName}
                     </Link>
                     <Link to={"/"} className="main-nav-item" onClick={() => dispatch(logout())}>
-                        <FontAwesomeIcon icon={faArrowAltCircleRight} />
-                        Sign Out
+                        <FontAwesomeIcon icon={faArrowAltCircleRight} /> Sign Out
                     </Link>
                 </> :
                     <Link className="main-nav-item" to="/login">

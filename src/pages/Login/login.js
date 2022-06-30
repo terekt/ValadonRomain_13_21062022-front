@@ -1,7 +1,7 @@
 import './login.css';
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { login } from '../../services/api';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser } from '@fortawesome/free-regular-svg-icons';
@@ -10,16 +10,11 @@ function Login() {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [error, setError] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const user = useSelector((state) => state.user);
 
     const handleSubmit = (e) => {
-        dispatch(login({firstName: username, "email": username, "password": password}))
-        console.log(username);
-        console.log(password);
-        console.log(user.value.firstName);
+        dispatch(login({firstName: "Tony", lastName: "Stark", "email": username, "password": password}))
         navigate("/user", { replace: true });
     }
 
