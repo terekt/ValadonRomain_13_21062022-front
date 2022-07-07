@@ -7,7 +7,7 @@ import securityIcon from "../../assets/icon-security.png";
 
 function Home() {
     return (
-        <div className="home">
+        <main className="home">
             <div className="hero">
                 <section className="hero-content">
                     <h2 className="sr-only">Promoted Content</h2>
@@ -23,7 +23,7 @@ function Home() {
                 <MarketingItem img={moneyIcon} title="More savings means higher rates" text="The more you save with us, the higher your interest rate will be!" />
                 <MarketingItem img={securityIcon} title="Security you can trust" text="We use top of the line encryption to make sure your data and money is always safe." />
             </section>
-        </div>
+        </main>
     )
 }
 
