@@ -10,33 +10,40 @@ function Login() {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
-        //dispatch(login({firstName: "Tony", lastName: "Stark", "email": username, "password": password}))
-        //navigate("/profile", { replace: true });
-        const data = JSON.stringify({ "email": username, "password": password })
-        
+    function handleSubmit(e) {
+        const input = JSON.stringify({ "email": username, "password": password })
+        //dispatch(login({firstName: "Tony", lastName: "Stark", "email": username, "password": password})) // To test without backend
+
         fetch("http://localhost:3001/api/v1/user/login",
             {
-                body: data,
+                body: input,
                 headers: { Accept: "application/json", "Content-Type": "application/json" },
                 method: "POST"
             }).then(data => {
                 if (data.ok === true) {
+                    setError(false);
                     return data.json()
+
                 }
-            }).then(data => {
+                throw new Error('Something went wrong')
+            }).then((dataJson) => {
                 fetch("http://localhost:3001/api/v1/user/profile", {
-                    headers: { Accept: "application/json", Authorization: 'Bearer' + data.body.token },
+                    headers: { Accept: "application/json", Authorization: 'Bearer' + dataJson.body.token },
                     method: "POST"
-                }).then(data => data.json()).then(data => dispatch(login(data)), navigate("/profile", { replace: true }))
+                })
+                    .then(data => data.json())
+                    .then(data => {
+                        dispatch(login(data))
+                        navigate("/profile", { replace: true })
+                    })
+            }).catch(() => {
+                setError(true);
             })
-
     }
-
-
 
     return (
         <main className="main bg-dark">
@@ -47,6 +54,7 @@ function Login() {
                     <div className="input-wrapper">
                         <label htmlFor="username">Username</label>
                         <input type="email" id="username" onChange={(e) => setUsername(e.target.value)} value={username} />
+                        <p className={`error ${error ? 'errorShow' : 'errorHide'}`} >Invalid username or password</p>
                     </div>
                     <div className="input-wrapper">
                         <label htmlFor="password">Password</label>

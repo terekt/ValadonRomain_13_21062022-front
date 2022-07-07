@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { editname } from '../../services/api';
 import "./profil.css"
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, navigate } from "react-router-dom";
 
 function Profil() {
 
@@ -24,16 +24,27 @@ function Profil() {
     const editState = (e) => {
         setIsActive(current => !current);
     };
-    
+
+    console.log(user.connected)
+
+    /*if (user.connected === false) {
+        console.log("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO")
+    }
+
+    useEffect(() => {
+        navigate("/");
+    }, [])*/
 
     //Redirect to home if not connected
-    /*useEffect(() => {
-        if (user.value.body.id === undefined ){
+    useEffect(() => {
+        if (user.connected === false ){
             navigate("/");
+            return (console.log("You can't access your profile, please log in to your account"))
         }
-    },[])*/
+    },[navigate, user.connected])
 
     return (
+        
         <main className="main bg-dark">
             <div className="header">
                 <div className={isActive ? 'edit-hide' : 'edit-show'}>
@@ -58,6 +69,7 @@ function Profil() {
             <Account title="Argent Bank Credit Card (x8349)" amount="$184.30" description="Current Balance" />
         </main>
     )
+    
 }
 
 export default Profil;

@@ -6,7 +6,7 @@ export const userSlice = createSlice({
     name: "user",
     initialState: {
         value: initialStateValue,
-        connected: false,
+        connected: false
     },
     reducers: {
         login: (state, action) => {
@@ -19,7 +19,6 @@ export const userSlice = createSlice({
         },
         editname: (state, action) => {
             state.value = action.payload;
-            state.connected = false;
         }
     }
 })
