@@ -37,7 +37,8 @@ function Login() {
                 })
                     .then(data => data.json())
                     .then(data => {
-                        dispatch(login(data))
+                        console.log(dataJson.body.token)
+                        dispatch(login([data, dataJson.body.token]))
                         navigate("/profile", { replace: true })
                     })
             }).catch(() => {

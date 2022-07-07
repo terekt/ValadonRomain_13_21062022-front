@@ -4,6 +4,7 @@ import { editname } from '../../services/api';
 import "./profil.css"
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, navigate } from "react-router-dom";
+import { account } from "../../data/data";
 
 function Profil() {
 
@@ -16,7 +17,30 @@ function Profil() {
 
     //Send change of name
     const handleSubmit = (e) => {
-        dispatch(editname({ firstName: firstname, lastName: lastname }))
+        const input = JSON.stringify({ "email": firstname, "password": lastname })
+        fetch("http://localhost:3001/api/v1/user/profile",
+            {
+                headers: { Accept: "application/json", Authorization: 'Bearer' + user.token },
+                method: "PUT",
+                body: JSON.stringify(input)
+            }).then(data => {
+                if (data.ok === true) {
+                    console.log("OK")
+                }
+                throw new Error('Something went wrong')
+            }).then((dataJson) => {
+                dispatch(editname({ firstName: firstname, lastName: lastname }))
+                console.log("dataJson: " + dataJson)
+            }).catch((error) => {
+                console.log(error)
+            })
+
+            //dispatch(editname([user.token, { "firstName": firstname, "lastName": lastname }])); // for later when reorganizing functions to diff file
+
+        //dispatch(editname({ firstName: firstname, lastName: lastname }))
+        console.log(input)
+        console.log(user)
+        //console.log(input)
         setIsActive(current => !current);
     }
 
@@ -25,26 +49,17 @@ function Profil() {
         setIsActive(current => !current);
     };
 
-    console.log(user.connected)
-
-    /*if (user.connected === false) {
-        console.log("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO")
-    }
-
-    useEffect(() => {
-        navigate("/");
-    }, [])*/
 
     //Redirect to home if not connected
-    useEffect(() => {
+    /*useEffect(() => {
         if (user.connected === false ){
             navigate("/");
             return (console.log("You can't access your profile, please log in to your account"))
         }
-    },[navigate, user.connected])
+    },[navigate, user.connected])*/
 
     return (
-        
+
         <main className="main bg-dark">
             <div className="header">
                 <div className={isActive ? 'edit-hide' : 'edit-show'}>
@@ -64,12 +79,12 @@ function Profil() {
                 </form>
             </div>
             <h2 className="sr-only">Accounts</h2>
-            <Account title="Argent Bank Checking (x8349)" amount="$2,082.79" description="Available Balance" />
-            <Account title="Argent Bank Savings (x6712)" amount="$10,928.42" description="Available Balance" />
-            <Account title="Argent Bank Credit Card (x8349)" amount="$184.30" description="Current Balance" />
+            <Account title={account[0].title} amount={account[0].amount} description={account[0].description} />
+            <Account title={account[1].title} amount={account[1].amount} description={account[1].description} />
+            <Account title={account[2].title} amount={account[2].amount} description={account[2].description} />
         </main>
     )
-    
+
 }
 
 export default Profil;
