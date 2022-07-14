@@ -2,9 +2,9 @@ import './login.css';
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { login } from '../../services/api';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser } from '@fortawesome/free-regular-svg-icons';
+import { LoginFetch } from '../../services/actions';
 
 function Login() {
 
@@ -14,35 +14,12 @@ function Login() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    function handleSubmit(e) {
+    function handleSubmit() {
         const input = JSON.stringify({ "email": username, "password": password })
         //dispatch(login({firstName: "Tony", lastName: "Stark", "email": username, "password": password})) // To test without backend
-
-        fetch("http://localhost:3001/api/v1/user/login",
-            {
-                body: input,
-                headers: { Accept: "application/json", "Content-Type": "application/json" },
-                method: "POST"
-            }).then(data => {
-                if (data.ok === true) {
-                    setError(false);
-                    return data.json()
-                }
-                throw new Error('Something went wrong')
-            }).then((dataJson) => {
-                fetch("http://localhost:3001/api/v1/user/profile", {
-                    headers: { Accept: "application/json", Authorization: 'Bearer' + dataJson.body.token },
-                    method: "POST"
-                })
-                    .then(data => data.json())
-                    .then(data => {
-                        console.log(dataJson.body.token)
-                        dispatch(login([data, dataJson.body.token]))
-                        navigate("/profile", { replace: true })
-                    })
-            }).catch(() => {
-                setError(true);
-            })
+        
+        LoginFetch(input, navigate, setError, dispatch)
+        
     }
 
     return (

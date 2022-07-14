@@ -1,10 +1,10 @@
 import Account from "../../components/account/account";
 import React, { useState, useEffect } from "react";
-import { editname } from '../../services/api';
 import "./profil.css"
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { account } from "../../data/data";
+import { UpdateNameFetch } from "../../services/actions";
 
 function Profil() {
 
@@ -16,29 +16,20 @@ function Profil() {
     const navigate = useNavigate();
 
     //Send change of name
-    const handleSubmit = (e) => {
+    function handleSubmit() {
 
         var input = {
             firstName: firstname,
             lastName: lastname,
         }
 
-        fetch("http://localhost:3001/api/v1/user/profile",
-            {
-                headers: { Accept: "application/json", Authorization: 'Bearer ' + user.token, 'Content-Type': 'application/json' },
-                method: "PUT",
-                body: JSON.stringify(input)
-            }).then(data => {
-                if (data.ok === true) {
-                    dispatch(editname({ firstName: firstname, lastName: lastname }))
-                }
-            })
+        UpdateNameFetch(input, dispatch, user)
 
         setIsActive(current => !current);
     }
 
     //Allow to hide or show the editing of the name
-    const editState = (e) => {
+    function editState() {
         setIsActive(current => !current);
     };
 
