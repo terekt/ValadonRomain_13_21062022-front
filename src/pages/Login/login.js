@@ -27,7 +27,6 @@ function Login() {
                 if (data.ok === true) {
                     setError(false);
                     return data.json()
-
                 }
                 throw new Error('Something went wrong')
             }).then((dataJson) => {

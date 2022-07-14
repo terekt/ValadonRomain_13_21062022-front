@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialStateValue = {firstName: "", lastName: "", email: "", password: ""};
+const initialStateValue = {firstName: "", lastName: ""};
 
 export const userSlice = createSlice({
     name: "user",
@@ -21,7 +21,7 @@ export const userSlice = createSlice({
             state.token = "";
         },
         editname: (state, action) => {
-            state.value = action.payload[0];
+            state.value.body = action.payload;
         }
     }
 })
