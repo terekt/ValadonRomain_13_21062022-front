@@ -33,7 +33,7 @@ paths:
           description: Invalid Fields
         '500':
           description: Internal Server Error
-  /user/profile/transaction/{IDtransaction}:
+  /user/profile/transaction/{id}:
     post:
       security:
         - Bearer: []
@@ -52,6 +52,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/TransactionDetail'
+        - name: id
+          in: path
+          description: ID of transaction to fetch
+          required: true
+          type: integer
+          format: int64
       produces:
         - application/json
       responses:
@@ -80,7 +86,13 @@ paths:
           description: Update user profile attributes
           required: true
           schema:
-            $ref: '#/definitions/UserProfile'
+            $ref: '#/definitions/TransactionUpdate'
+        - name: id
+          in: path
+          description: ID of transaction to fetch
+          required: true
+          type: integer
+          format: int64
       produces:
         - application/json
       responses:
